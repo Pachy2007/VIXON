@@ -9,8 +9,8 @@ public class StateArray {
     public void addState(String name , State nextState , double...positions){
         states.add(new State(name , nextState , positions));
     }
-    public void addState(String name , double...positions){
-        states.add(new State(name , positions));
+    public void addState(String name ,double...positions){
+        states.add(new State(name ,positions));
     }
 
     public State get(String name) {

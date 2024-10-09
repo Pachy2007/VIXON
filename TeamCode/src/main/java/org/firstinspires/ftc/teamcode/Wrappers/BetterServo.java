@@ -19,17 +19,20 @@ public class BetterServo {
     public boolean reachedPosition=true;
 
     Servo servo;
+    public String name;
 
-    public BetterServo(Servo servo , RunMode runMode , double initialPosition , boolean reversed)
+    public BetterServo(String name,   Servo servo , RunMode runMode , double initialPosition , boolean reversed)
     {
+        this.name=name;
         this.servo=servo;
         this.runMode=runMode;
         this.servo.setPosition(initialPosition);
         if(reversed)servo.setDirection(Servo.Direction.REVERSE);
         position=initialPosition;
     }
-    public BetterServo(Servo servo , RunMode runMode  , boolean reversed)
+    public BetterServo(String name, Servo servo , RunMode runMode  , boolean reversed)
     {
+        this.name=name;
         this.servo=servo;
         this.runMode=runMode;
         if(reversed)servo.setDirection(Servo.Direction.REVERSE);
@@ -41,7 +44,7 @@ public class BetterServo {
         if(runMode!=RunMode.PROFILE)return;
 
         profile=new BetterMotionProfile(maxVelocity , acceleration , deceleration);
-        profile.setMotion(servo.getPosition() , servo.getPosition() , 0);
+        profile.setMotion(0 , 0 , 0);
     }
 
     public void setPosition(double position)

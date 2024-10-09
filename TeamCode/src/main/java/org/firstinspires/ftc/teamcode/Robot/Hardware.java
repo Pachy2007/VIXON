@@ -23,7 +23,8 @@ public class Hardware {
 
     public static IMU imu;
 
-    public static void init(HardwareMap hardwareMap)
+    public static void
+    init(HardwareMap hardwareMap)
     {
         if(INIT)return;
         INIT=true;
@@ -50,6 +51,15 @@ public class Hardware {
         seh3=hardwareMap.get(Servo.class , "seh3");
         seh4=hardwareMap.get(Servo.class , "seh4");
         seh5=hardwareMap.get(Servo.class , "seh5");
+
+        imu=hardwareMap.get(IMU.class , "imu");
+
+        IMU.Parameters parameters = new IMU.Parameters(new RevHubOrientationOnRobot(
+                RevHubOrientationOnRobot.LogoFacingDirection.LEFT, RevHubOrientationOnRobot.UsbFacingDirection.DOWN
+        ));
+        imu.initialize(parameters);
+
+        imu.resetYaw();
 
 
     }

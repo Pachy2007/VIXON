@@ -31,8 +31,7 @@ public class ServoModuleTest extends LinearOpMode {
 
         while(opModeIsActive())
         {
-            if(gamepad1.a)
-            ramp.setState("goingUp");
+            if(gamepad1.a)ramp.setState("goingUp");
             if(gamepad1.b)
                 ramp.setState("goingDown");
 

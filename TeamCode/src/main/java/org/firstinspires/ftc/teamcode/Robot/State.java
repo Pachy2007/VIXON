@@ -6,18 +6,22 @@ public class State {
 
     double[] positions;
     State nextState;
+    public boolean next;
 
     public State(String name , State nextState , double... positions)
     {
         this.name=name;
         this.nextState=nextState;
         this.positions=positions;
+        next=true;
     }
+
     public State(String name   , double... positions)
     {
-        this.name=name;
-        this.nextState=this;
         this.positions=positions;
+        this.name = name;
+        this.nextState=this;
+        next=false;
     }
 
     public double getPosition( int index) {

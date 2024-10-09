@@ -8,9 +8,10 @@ import org.firstinspires.ftc.teamcode.Wrappers.BetterServo;
 public abstract class IServoModule{
 
     public boolean ENABLE=true;
-    State state;
+    public State state;
 
 
+    public String moduleName;
     public double maxVelocity , acceleration , deceleration;
 
     public BetterServo[] servos;
@@ -45,6 +46,7 @@ public abstract class IServoModule{
 
     public void setState(String name)
     {
+        if(state==states.get(name) || state==states.get(name).nextState)return;
         state=states.get(name);
     }
 
@@ -61,9 +63,16 @@ public abstract class IServoModule{
     {
         for(int i=0;i<servos.length;i++)
         {
-            telemetry.addData("RampServo" , servos[i].getPosition());
+            telemetry.addData( moduleName+servos[i].name , servos[i].getPosition());
         }
-        telemetry.addData("RampState" , state.name);
+        telemetry.addData( moduleName+"STATE" , state.name);
+    }
+
+    public boolean inPosition()
+    {
+        for(int i=0;i<servos.length;i++)
+            if(!servos[i].inPosition())return false;
+        return true;
     }
 
 

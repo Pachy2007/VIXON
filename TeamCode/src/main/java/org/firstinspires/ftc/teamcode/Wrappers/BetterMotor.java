@@ -8,7 +8,7 @@ import org.firstinspires.ftc.teamcode.Math.PIDController;
 
 public class BetterMotor {
 
-    enum RunMode{
+    public enum RunMode{
         RUN ,
         PID
     }
@@ -16,6 +16,7 @@ public class BetterMotor {
 
     PIDController pidController;
     DcMotorEx motor;
+    boolean power;
 
     public double targetPosition;
 
@@ -41,11 +42,13 @@ public class BetterMotor {
 
     public void setPosition(double position)
     {
+        power=false;
         targetPosition=position;
     }
 
     public void setPower(double power)
     {
+        this.power=true;
         motor.setPower(power);
     }
     public void setRunMode(RunMode runMode)
@@ -72,7 +75,7 @@ public class BetterMotor {
 
     public void update()
     {
-        if(runMode==RunMode.RUN)return;
+        if(runMode==RunMode.RUN || power==true)return;
 
         double power=pidController.calculate(targetPosition , motor.getCurrentPosition());
 
